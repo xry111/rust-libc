@@ -73,7 +73,8 @@ s! {
             target_arch = "mips64",
             target_arch = "powerpc64",
             target_arch = "riscv64",
-            target_arch = "sparc64")))]
+            target_arch = "sparc64",
+            target_arch = "loongarch64")))]
         __reserved: ::__syscall_ulong_t,
         pub sem_ctime: ::time_t,
         #[cfg(not(any(
@@ -81,7 +82,8 @@ s! {
             target_arch = "mips64",
             target_arch = "powerpc64",
             target_arch = "riscv64",
-            target_arch = "sparc64")))]
+            target_arch = "sparc64",
+            target_arch = "loongarch64")))]
         __reserved2: ::__syscall_ulong_t,
         pub sem_nsems: ::__syscall_ulong_t,
         __glibc_reserved3: ::__syscall_ulong_t,
@@ -115,6 +117,9 @@ cfg_if! {
     } else if #[cfg(any(target_arch = "riscv64"))] {
         mod riscv64;
         pub use self::riscv64::*;
+    } else if #[cfg(any(target_arch = "loongarch64"))] {
+        mod loongarch64;
+        pub use self::loongarch64::*;
     } else {
         // Unknown target_arch
     }
